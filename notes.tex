@@ -1,0 +1,304 @@
+% LaTeX
+
+\documentclass[11pt]{amsart} 
+
+\usepackage{amsthm,amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{pstricks}
+\usepackage[utf8]{inputenc} %unicode support
+\usepackage{graphicx}
+\let\psgrid\relax
+\psset{gridcolor = gray, subgridcolor = gray}
+
+\theoremstyle{definition} \newtheorem{thm}{Theorem:} \theoremstyle{plain}
+\theoremstyle{definition} \newtheorem*{nnthm}{Theorem:} \theoremstyle{plain}
+\theoremstyle{definition} \newtheorem{lem}{Lemma} \theoremstyle{plain}
+\theoremstyle{definition} \newtheorem*{nnlem}{Lemma:} \theoremstyle{plain}
+\theoremstyle{definition} \newtheorem{prf}{Proof:} \theoremstyle{plain}
+\theoremstyle{definition} \newtheorem*{nnprf}{Proof:} \theoremstyle{plain}
+\theoremstyle{definition} \newtheorem{eg}{Example:} \theoremstyle{plain}
+\theoremstyle{definition} \newtheorem*{sol}{Solution:} \theoremstyle{plain}
+
+\newcommand{\setcomp}[1]{{#1}^{\mathsf{c}}}
+\newcommand{\prob}[1]{\mathbf{P}(#1)}
+\newcommand{\twocup}[2]{{#1} \,\cup\, {#2}}
+\newcommand{\threecup}[3]{{#1} \,\cup\, {#2} \,\cup\, {#3}}
+\newcommand{\fourcup}[4]{{#1} \,\cup\, {#2} \,\cup\, {#3} \,\cup\, {#4}}
+\newcommand{\twocap}[2]{{#1} \,\cap\, {#2}}
+\newcommand{\threecap}[3]{{#1} \,\cap\, {#2} \,\cap\, {#3}}
+\newcommand{\fourcap}[4]{{#1} \,\cap\, {#2} \,\cap\, {#3} \,\cap\, {#4}}
+\newcommand{\sngltn}[1]{\{ {#1} \}}
+
+%\textwidth = 460pt 
+%\textheight = 8in 
+%\hoffset=-54pt \voffset=-40pt
+
+% SIDE MARGINS:
+\oddsidemargin 0in \evensidemargin 0in
+
+% VERTICAL SPACING:
+%\topmargin -.15in
+\topmargin -.4in
+\headheight 0in \headsep 0.0in
+%\footheight 0.5in
+\footskip 1.5in
+
+\pagestyle{plain}
+%\pagenumbering{}
+
+% DIMENSION OF TEXT:
+\textheight 9.0in \textwidth 6.8in
+%
+
+%\textwidth = 470pt
+%\textheight = 700pt
+%%\topmargin = 0pt
+%%\oddsidemargin = 0pt
+%\hoffset = -60pt
+%\voffset = -50pt
+
+%\input epsf \def\epsfsize#1#2{0.4#1\relax} \def\nl{\hfil\break}
+
+%\renewcommand{\baselinestretch}{1.2}
+%\def\Indent{\hskip .2in}
+%Sri Ramajayam
+%Jai Hanuman
+
+\title[]{Teaching Statement}
+
+\author[]{Prabu Ravindran}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\section{Sample space}
+The \emph{set} of possible outcomes for an experiment is called the 
+\textbf{sample space}. It is denoted as $\Omega$. The requirements to keep in 
+mind when defining a sample space are:
+\begin{itemize}
+\item The elements of the set must be mutually exclusive. 
+\item The elements of the set must be exhaustive.
+\item The elements must chosen at the right granularity. This usually 
+    depends on the experiment and the questions we are trying to answer. 
+\end{itemize}
+
+\begin{eg} 
+For the experiment of flipping a coin, and for 
+each one of the following choices, determine whether we have a legitimate 
+sample space:
+\begin{enumerate}
+\item
+$\Omega = \{\mbox{Heads and it is raining, 
+                   Heads and it is not raining, 
+                   Tails}\}$
+\item
+$\Omega = \{\mbox{Heads and it is raining, 
+                  Tails and it is not raining, 
+                  Tails}\}$ 
+\end{enumerate}
+\end{eg}
+\begin{sol}
+\hfill
+\begin{enumerate}
+\item
+It is a sample space. The events are mutually exclusive and exhaustive.
+\item
+It is \emph{not} a sample space as the events are not mutually exclusive. 
+\end{enumerate}
+\end{sol} 
+
+\section{Examples of sample space}
+Example of a discrete and finite sample space is the experiment where we roll 
+two tetrahedral die. We can sometimes think of an experiment as a sequential 
+process or one that is made of stages. This leads to a tree based 
+conceptualization of the experiment's sample space. For example, we can think 
+of the two tetrahedral die experiment as rolling the first die followed by the 
+second die to get the ordered pairs in the sample space. The sample space for 
+this example is:
+\begin{equation*}
+\Omega = \{ (i, j) \mid i, j \in \{ 1, 2, 3, 4 \} \}.
+\end{equation*}
+
+Example of a continuous sample space is the experiment of throwing a dart on a 
+unit square target where the position of the dart can be measured with infinite precision. 
+\begin{equation*}
+\Omega = \{ (x, y) \mid 0 \leq x, y \leq 1\}.
+\end{equation*}
+
+\section{Probability axioms}
+The first ingredient in specifying a probability model is the sample space. The 
+second ingredient is the probability law. The probability law tells how 
+(relatively) likely each outcome is. This point of view runs into some issues 
+especially when dealing with continuous sample spaces, where the probability 
+of getting a particular outcome (with infinite precision) is zero. In order to 
+overcome this problem probabilities are assigned to subsets of the sample space. 
+Subsets of the sample space are called \textbf{events}. For the probability law 
+to be legitimate it must adhere to the following \textbf{probability axioms}:
+\begin{itemize}
+\item Non-negativity: $\prob{A} \geq 0$, where $A$ is an event.
+\item Normalization: $\prob{\Omega} = 1$.
+\item (Finite) Additivity: If $A$ and $B$ represent events, such that 
+$\twocap{A}{B} = \emptyset $, then 
+$\prob{\twocup{A}{B}} = \prob{A} + \prob{B}$.
+\end{itemize}
+  
+
+\section{Consequences of probability axioms}
+The following are the consequences of the probability axioms:
+
+\begin{lem}
+$\prob{A} + \prob{\setcomp{A}} = 1$.
+\end{lem}
+\begin{nnprf}
+The outcome of an experiment must either belong to a set $A$ or 
+not. Thus we have: $\twocup{A}{\setcomp{A}} = \Omega$. We can also see that 
+$A$ and $\setcomp{A}$ are disjoint sets. Thus using the additivity axiom we 
+get $\prob{A} + \prob{\setcomp{A}} = 1$.
+\end{nnprf}
+
+\begin{lem}
+$\prob{A} \leq  1$.
+\end{lem}
+\begin{nnprf}
+From lemma above we have $\prob{A} + \prob{\setcomp{A}} = 1$. This implies that 
+$\prob{A} = 1 - \prob{\setcomp{A}}$. Since probabilities as nonnegative we have 
+$\prob{A} \leq 1$. 
+\end{nnprf}
+
+\begin{lem}
+$\prob{\emptyset} = 0$.
+\end{lem}
+\begin{nnprf}
+The sum of the probabilities of an event and its complement is one, from lemma 
+above. Thus we have $\prob{\Omega} + \prob{\setcomp{\Omega}} = 1$. From the 
+probability axioms we have $\prob{\Omega} = 1$. 
+Also $\setcomp{\Omega} = \emptyset$. Thus we have $\prob{\emptyset} = 0$.
+\end{nnprf}
+
+\begin{lem}
+For disjoint events $A$, $B$, $C$, 
+$\prob{\threecup{A}{B}{C}} = \prob{A} + \prob{B} + \prob{C}$.
+\end{lem}
+\begin{nnprf}
+The events $\twocup{A}{B}$ and $C$ are disjoint and hence:
+\begin{align*}
+\prob{\threecup{A}{B}{C}} & = \prob{\twocup{(\twocup{A}{B})}{C}} \\
+                          & = \prob{\twocup{A}{B}} + \prob{C} \\
+                          & = \prob{A} + \prob{B} + \prob{C}.
+\end{align*}
+\end{nnprf}
+ 
+
+\begin{lem}
+If events $A_1, A_2, \ldots, A_k$ are disjoint and $k$ is finite, we have that 
+$\prob{\fourcup{A_1}{A_2}{\ldots}{A_k}} = 
+\prob{A_1} + \prob{A_2} + \ldots + \prob{A_k}$.
+\end{lem}
+\begin{nnprf}
+The proof for the case of three events is extended to prove this lemma. 
+\end{nnprf}
+
+\begin{lem}
+For the event $S = \{ s_1, s_2, \ldots, s_k\}$,
+$\prob{\{ s_1, s_2, \dots, s_k\}} = \prob{\sngltn{s_1}} + 
+\prob{\sngltn{s_2}} + \ldots + \prob{\sngltn{s_k}}$.
+\end{lem}
+\begin{nnprf}
+The elements in the set $S$ are mutually exclusive (disjoint). Hence:
+\begin{align*}
+\prob{\{ s_1, s_2, \dots, s_k\}} & = 
+\prob{\fourcup{\sngltn{s_1}}{\sngltn{s_2}}{\ldots}{\sngltn{s_k}}} \\
+& = \prob{\sngltn{s_1}} + \prob{\sngltn{s_2}} + 
+    \ldots + \prob{\sngltn{s_k}}~\mbox{(finite additivity)}.
+\end{align*} 
+We abuse notation to write $\prob{\sngltn{s_i}}$ as $\prob{s_i}$.
+\end{nnprf}
+
+\begin{lem}
+If $A \subset B$, then $\prob{A} \leq \prob{B}$.
+\end{lem}
+\begin{nnprf}
+We can write the event $B$ as the union of two disjoint events: 
+$\twocup{A}{\twocap{B}{\setcomp{A}}}$. Using the additivity axiom we have
+$\prob{B} = \prob{A} + \prob{\twocap{B}{\setcomp{A}}}$. Non-negativity of 
+probabilities implies $\prob{A} \leq \prob{B}$. 
+\end{nnprf}
+
+\begin{lem}
+$\prob{\twocup{A}{B}} = \prob{A} + \prob{B} - \prob{\twocap{A}{B}}$.
+\end{lem}
+\begin{nnprf}
+We will express the event $\twocup{A}{B}$ as the union of the disjoint events: 
+$\twocap{A}{\setcomp{B}}$, $\twocap{A}{B}$ and $\twocap{B}{\setcomp{A}}$. Let 
+us denote the probability of these events to be $a$, $b$ and $c$ respectively. 
+Using this notation we have for the right hand side:
+\begin{equation*}
+(a + b) + (b + c) - b = a + b + c.
+\end{equation*}
+Using the additivity axiom the right hand side is also $a + b + c$. 
+\end{nnprf}
+
+\begin{lem}
+$\prob{\twocup{A}{B}} \leq \prob{A} + \prob{B}$
+\end{lem}
+\begin{nnprf}
+Non-negativity of probabilities means $\prob{\twocup{A}{B}} \geq 0$. Using this 
+in the result 
+$\prob{\twocup{A}{B}} = \prob{A} + \prob{B} - \prob{\twocap{A}{B}}$, yields the 
+required inequality. This inequality is referred to as the \emph{union bound}.
+\end{nnprf}
+
+\begin{lem}
+$
+\prob{\threecup{A}{B}{C}} = \prob{A} + \prob{\twocap{\setcomp{A}}{B}} + 
+\prob{\threecap{\setcomp{A}}{\setcomp{B}}{C}}$.
+\end{lem}
+\begin{nnprf}
+We write $\threecup{A}{B}{C}$ as the union of three disjoint events 
+\begin{equation*}
+\threecup{A}{B}{C} = 
+\threecup{A}{(\twocap{\setcomp{A}}{B})}{(\threecap{\setcomp{A}}{\setcomp{B}}{C})}.
+\end{equation*}
+Invoking finite additivity property of probabilities proves the desired lemma. 
+\end{nnprf}
+
+
+
+\section{Discrete uniform probability law}
+Let $\Omega$ be a finite sample space with $n$ \emph{equally likely} outcomes. 
+Let $A \subset \Omega$ have $k$ elements. Then $\prob{A} = \frac{k}{n}$. This 
+choice of probability law where every outcome in the sample space is equally 
+likely is called the \textbf{uniform probability law}. Under this probability 
+law counting plays an important role in the computation of probabilities.
+ 
+\begin{eg}
+Consider the same model of two rolls of a tetrahedral die, with all $16$ 
+outcomes equally likely. Find the probability of the following events:
+\begin{enumerate}
+\item
+The value in first roll is strictly larger than Svalue in the second roll.
+\item
+The sum of the values obtained in the two rolls is an even number.
+\end{enumerate}
+\end{eg}
+\begin{sol}
+\hfill
+\begin{enumerate}
+\item
+The event of interest is $\{ (2, 1), (3, 1), (3, 2), (4, 1), (4, 2), (4, 3) \}$. 
+We have $6$ outcomes each of which has probability $\frac{1}{16}$. The overall probability is thus $\frac{6}{16}$.
+\item
+The event of interest is $\{ (1, 1), (1, 3), (3, 1), (2, 2), (2, 4), (4, 2), 
+(3, 3), (4, 4) \}$. We have $8$ outcomes each of which has probability 
+$\frac{1}{16}$. The overall probability is thus $\frac{8}{16}$.
+\end{enumerate}
+\end{sol}
+
+
+\section{Continuous uniform probability law}
+For continuous sample space, the uniform probability law is the same as saying 
+that the probability of an event (subset) is equal to the ``area" of the subset.
+
+\end{document}
